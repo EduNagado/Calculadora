@@ -62,26 +62,45 @@ function ValidarExpessao() {
                 if (resultado !== null) {
                     document.getElementById("tela").value = resultado;
                 }
-                return;
+                return ;
             } else {
                 alert("Digite apenas um operador");
                 return limparTela();
             }
         }
     }
-    return false;
+     alert("Digite uma expressão válida!");
+     return limparTela();
 }
+
 function exibirNaTela(valor) {
     document.getElementById("tela").value += valor;
 }
 
 window.onload = function eventoTecla(){
+    document.getElementById("tela").focus();
+
     document.getElementById('tela').addEventListener('keydown', function (event) {
-        if (event.key === "Enter"|| event.key === "=") {
-            ValidarExpessao();
+        const tecla = event.key;
+        if (tecla === "Enter" || tecla === "=") {
+            event.preventDefault(); 
+            ValidarExpessao(); 
         }
     });
+
+    document.getElementById("tela").addEventListener("keydown", function (event) {
+        const tecla = event.key;
     
+        const permitido = ["0","1","2","3","4","5","6","7","8","9", "+", "-", "*", "/", "Backspace", "Enter", "="];
+    
+        if (!permitido.includes(tecla)) {
+            event.preventDefault();
+        }
+    
+      
+    });
+
+        
     // document.getElementById("tela").addEventListener("keydown", function (event) {
     //     if (event.key === "C") {
     //         limparUltimo();
@@ -93,8 +112,6 @@ window.onload = function eventoTecla(){
     //         limparTela();
     //     }
     // })
-
-    document.getElementById("tela").focus();
 }
 
 //botão AC
