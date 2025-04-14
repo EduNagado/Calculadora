@@ -39,11 +39,6 @@ function calcular(num1, num2, operador) {
     return resultado;
 }
 
-function validarString (){
-    const StringInvalida = ['a','b','c','d']
-}
-
-
 function ValidarExpessao() {
     for (let op of operadorValido) {
         const expressao = document.getElementById("tela").value;
