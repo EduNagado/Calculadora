@@ -75,9 +75,9 @@ function exibirNaTela(valor) {
 window.onload = function eventoTecla(){
     document.getElementById("tela").focus();
 
-    document.getElementById('tela').addEventListener('keydown', function (event) {
+    document.addEventListener('keydown', function (event) {
         const tecla = event.key;
-        if (tecla === "Enter" || tecla === "=") {
+        if (tecla =="Enter" || tecla == "=") {
             event.preventDefault(); 
             ValidarExpessao(); 
         }
