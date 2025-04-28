@@ -29,6 +29,23 @@ window.onload = function() {
         }
     });
 
+    document.addEventListener('keydown', function(event) {
+        const tecla = event.key.toLowerCase();
+        
+        if (tecla === 's') {
+            event.preventDefault();
+            document.getElementById("tela").value += 'sin(';
+        } 
+        else if (tecla === 'c') {
+            event.preventDefault();
+            document.getElementById("tela").value += 'cos(';
+        }
+        else if (tecla === 't') {
+            event.preventDefault();
+            document.getElementById("tela").value += 'tan(';
+        }
+    });
+
     document.getElementById("tela").addEventListener("keydown", function(event) {
         const tecla = event.key;
         const permitido = ["0","1","2","3","4","5","6","7","8","9", "+", "-", "*", "/", "r", 
@@ -67,6 +84,20 @@ function calcularPotencia() {
     tela.value += "^";
 }
 
+function inserirSeno() {
+    const tela = document.getElementById("tela");
+    tela.value += "sin(";
+}
+
+function inserirCosseno() {
+    const tela = document.getElementById("tela");
+    tela.value += "cos(";
+}
+
+function inserirTangente() {
+    const tela = document.getElementById("tela");
+    tela.value += "tan(";
+}
 
 function calcular(num1, num2, operador) {
     switch (operador) {
@@ -211,22 +242,138 @@ function processarFatorial(expressao) {
     return expressao;
 }
 
-function ValidarExpessao() {
-    const tela = document.getElementById("tela");
-    let expressao = tela.value.trim();
 
-    try {
-        // Substitui símbolos visuais
-        expressao = expressao.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
-        
-        // Processa raízes quadradas primeiro
-        expressao = calcularRaizQuadrada(expressao);
-        
-        // Agora calcula TODA a expressão, não apenas subexpressões
-        const resultado = calcularExpressaoCompleta(expressao);
-        tela.value = resultado;
-    } catch (error) {
-        alert("Erro: " + error.message);
-        limparTela();
+    function ValidarExpessao() {
+        const tela = document.getElementById("tela");
+        let expressao = tela.value.trim();
+
+        try {
+            expressao = expressao.replace(/×/g, '*')
+                                .replace(/÷/g, '/')
+                                .replace(/−/g, '-');
+
+            expressao = processarFuncoes(expressao);
+
+            const resultado = calcularExpressaoBasica(expressao);
+            tela.value = resultado;
+
+        } catch (error) {
+            alert("Erro: " + error.message);
+            limparTela();
+        }
     }
+
+    function processarFuncoesEspeciais(expr) {
+        const funcoes = [
+            { padrao: /sin\(([^)]+)\)/g, calcular: calcularSeno },
+            { padrao: /cos\(([^)]+)\)/g, calcular: calcularCosseno },
+            { padrao: /tan\(([^)]+)\)/g, calcular: calcularTangente },
+            { padrao: /√\(([^)]+)\)/g, calcular: Math.sqrt },
+            { padrao: /(\d+)!/g, calcular: calcularFatorial }
+        ];
+    
+        funcoes.forEach(({ padrao, calcular }) => {
+            while (expr.match(padrao)) {
+                expr = expr.replace(padrao, (_, conteudo) => {
+                    return calcular(calcularExpressaoBasica(conteudo));
+                });
+            }
+        });
+    
+        return expr;
+    }
+
+    
+    // Funções auxiliares organizadas por tipo:
+    const processarFuncoes = (expressao) => {
+        const processadores = [
+            { regex: /sin\(([^)]+)\)/g, fn: calcularSeno },
+            { regex: /cos\(([^)]+)\)/g, fn: calcularCosseno },
+            { regex: /tan\(([^)]+)\)/g, fn: calcularTangente },
+            { regex: /√\(([^)]+)\)/g, fn: (n) => Math.sqrt(n) },
+            { regex: /(\d+)!/g, fn: calcularFatorial }
+        ];
+    
+        processadores.forEach(({ regex, fn }) => {
+            while (expressao.match(regex)) {
+                expressao = expressao.replace(regex, (_, conteudo) => {
+                    const valor = calcularExpressaoBasica(conteudo);
+                    return fn(valor);
+                });
+            }
+        });
+    
+        return expressao;
+    };
+    
+    const calcularExpressaoBasica = (expressao) => {
+        // Ordem de precedência das operações
+        const operadores = [
+            ['^'],
+            ['*', '/', '%'],
+            ['+', '-']
+        ];
+    
+        let expr = expressao.replace(/\s+/g, '');
+    
+        operadores.forEach(ops => {
+            expr = processarOperadores(expr, ops);
+        });
+    
+        return parseFloat(expr);
+    };
+
+
+function calcularSeno(graus) {
+    return Math.sin(graus * Math.PI / 180);
 }
+
+function calcularCosseno(graus) {
+    return Math.cos(graus * Math.PI / 180);
+}
+
+function calcularTangente(graus) {
+    const radianos = graus * Math.PI / 180;
+    if (Math.abs(Math.cos(radianos)) < 1e-10) {
+        throw new Error("Tangente indefinida (ângulo de 90° ou 270°)");
+    }
+    return Math.tan(radianos);
+}
+
+
+document.addEventListener('keydown', function(event) {
+    const tecla = event.key.toLowerCase();
+    const botaoVirtual = document.querySelector(`[data-key="${tecla}"]`);
+    
+    if (botaoVirtual) {
+        botaoVirtual.classList.add('tecla-pressionada');
+        
+        setTimeout(() => {
+            botaoVirtual.classList.remove('tecla-pressionada');
+        }, 200);
+    }
+});
+
+const teclasEspeciais = {
+    'Enter': '=',
+    'Escape': 'AC',
+    'Delete': 'C',  
+    'r': '√',
+    's': 'sin',
+    'c': 'cos',
+    't': 'tan'
+};
+
+document.addEventListener('keydown', function(event) {
+    const tecla = event.key.toLowerCase();
+    
+    // Verifica teclas especiais
+    if (teclasEspeciais[tecla]) {
+        const botao = document.querySelector(`[onclick*="${teclasEspeciais[tecla]}"]`);
+        if (botao) {
+            botao.click(); // Ativa o clique virtual
+            botao.classList.add('tecla-pressionada');
+            setTimeout(() => botao.classList.remove('tecla-pressionada'), 200);
+        }
+    }
+});

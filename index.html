@@ -14,49 +14,45 @@
                 <input class="exibir-numeros"  id="tela" type="text" > <!-- autofocus-->
             </div>
             <div class="botoes">  
-                <button class="botao" onclick="limparTela()">AC</button>
-                <button class="botao" onclick="exibirNaTela('(')">(</button>
-                <button class="botao" onclick="exibirNaTela(')')">)</button>
-                <button class="botao" onclick="exibirNaTela('%')">%</button>
-                
-                <button class="botao" onclick="inserirRaizQuadrada()">√</button>
-                <button class="botao" onclick="calcularPotencia()">x^y</button>
-                <button class="botao" onclick="exibirNaTela('!')">x!</button>
-                <button class="btn-operacao" onclick="exibirNaTela('/')">÷</button>
-                
-            
-                <button class="botao" onclick="exibirNaTela('7')">7</button>
-                <button class="botao" onclick="exibirNaTela('8')">8</button>
-                <button class="botao" onclick="exibirNaTela('9')">9</button>
-                <button class="btn-operacao" onclick="exibirNaTela('*')">×</button>
-                
-            
-                <button class="botao" onclick="exibirNaTela('4')">4</button>
-                <button class="botao" onclick="exibirNaTela('5')">5</button>
-                <button class="botao" onclick="exibirNaTela('6')">6</button>
-                <button class="btn-operacao" onclick="exibirNaTela('-')">−</button>
-                
-            
-                <button class="botao" onclick="exibirNaTela('1')">1</button>
-                <button class="botao" onclick="exibirNaTela('2')">2</button>
-                <button class="botao" onclick="exibirNaTela('3')">3</button>
-                <button class="btn-operacao" onclick="exibirNaTela('+')">+</button>
-            
-                <button class="botao" onclick="calcularSeno('sin')">sin</button>
-                <button class="botao" onclick="exibirNaTela('0')">0</button>
-                <button class="botao" onclick="exibirNaTela('.')">.</button>
-                <button class="botao" onclick="ValidarExpessao()">=</button>
-                
-            
-                <button class="botao" onclick="calcularCosseno('cos')">cos</button>
-                <button class="botao" onclick="calcularTangente('tan')">tan</button>
-                <button class="btn-cancelar" onclick='limparUltimo()'>C</button>
-                
+               
+                <button class="botao" onclick="limparTela()" data-key="Escape">AC</button>
+                <button class="botao" onclick="exibirNaTela('(')" data-key="(">(</button>
+                <button class="botao" onclick="exibirNaTela(')')" data-key=")">)</button>
+                <button class="botao" onclick="exibirNaTela('%')" data-key="%">%</button>
+
+                <button class="botao" onclick="inserirRaizQuadrada()" data-key="r">√</button>
+                <button class="botao" onclick="calcularPotencia()" data-key="^">x^y</button>
+                <button class="botao" onclick="exibirNaTela('!')" data-key="!">x!</button>
+                <button class="btn-operacao" onclick="exibirNaTela('/')" data-key="/">÷</button>
+
+                <button class="botao" onclick="exibirNaTela('7')" data-key="7">7</button>
+                <button class="botao" onclick="exibirNaTela('8')" data-key="8">8</button>
+                <button class="botao" onclick="exibirNaTela('9')" data-key="9">9</button>
+                <button class="btn-operacao" onclick="exibirNaTela('*')" data-key="*">×</button>
+
+                <button class="botao" onclick="exibirNaTela('4')" data-key="4">4</button>
+                <button class="botao" onclick="exibirNaTela('5')" data-key="5">5</button>
+                <button class="botao" onclick="exibirNaTela('6')" data-key="6">6</button>
+                <button class="btn-operacao" onclick="exibirNaTela('-')" data-key="-">−</button>
+
+                <button class="botao" onclick="exibirNaTela('1')" data-key="1">1</button>
+                <button class="botao" onclick="exibirNaTela('2')" data-key="2">2</button>
+                <button class="botao" onclick="exibirNaTela('3')" data-key="3">3</button>
+                <button class="btn-operacao" onclick="exibirNaTela('+')" data-key="+">+</button>
+
+                <button class="botao" onclick="inserirSeno()" data-key="s">sin</button>
+                <button class="botao" onclick="exibirNaTela('0')" data-key="0">0</button>
+                <button class="botao" onclick="exibirNaTela('.')" data-key=".">.</button>
+                <button class="botao" onclick="ValidarExpessao()" data-key="Enter">=</button>
+
+                <button class="botao" onclick="inserirCosseno()" data-key="c">cos</button>
+                <button class="botao" onclick="inserirTangente()" data-key="t">tan</button>
+                <button class="btn-cancelar" onclick="limparUltimo()" data-key="Delete">C</button>
 
             </div>
         </section>
     </main>
-    <script src="logica.js"></script>
+    <script src="/js/logica.js"></script>
 </body>
 </html>
 

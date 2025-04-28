@@ -15,7 +15,7 @@ body {
 
 .Calculadora {
     background-color: #ffffff;
-    width: 340px;
+    width: 440px;
     border-radius: 8px;
     box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
     overflow: hidden;
@@ -195,4 +195,22 @@ body {
         height: 40px; 
         font-size: 1rem; 
     }
+}
+
+/* Efeito quando tecla é pressionada */
+.tecla-pressionada {
+    transform: scale(0.92);
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
+    background-color: #e0e0e0 !important;
+    transition: all 0.1s ease;
+}
+
+/* Para botões de operação (ajuste conforme seu tema) */
+.btn-operacao.tecla-pressionada {
+    background-color:  #356ac7!important;
+}
+
+/* Para botão de igual */
+.botao[data-key="Enter"].tecla-pressionada {
+    background-color: #4CAF50 !important;
 }
