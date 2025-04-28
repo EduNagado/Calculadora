@@ -1,16 +1,12 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Google Sans', Arial, sans-serif;
 }
 
 body {
-    background-color: #f1f1f1;
-}
-
-main {
+    background-color: #f1f3f4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,72 +14,185 @@ main {
 }
 
 .Calculadora {
-    display: flex;
-    flex-direction: column;
     background-color: #ffffff;
-    width: 350px;
-    border-radius: 20px;
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    width: 340px;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
     overflow: hidden;
-    padding: 20px;
+    padding: 16px;
 }
 
 .tela-numeros {
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .exibir-numeros {
     width: 100%;
-    height: 80px;
-    font-size: 2.5rem;
+    height: 72px;
+    font-size: 2.2rem;
     text-align: right;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border: none;
-    border-radius: 10px;
-    background-color: #5a87da;
-    color: #fff;
+    border-radius: 4px;
+    background-color: #3b77e08a;
+    color: #202124;
+    font-weight: 400;
+    outline: none;
 }
 
 .botoes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 8px;
 }
 
-.botao,
-.btn-cancelar,
-.btn-reultado {
-    height: 60px;
-    font-size: 1.5rem;
+.botao {
+    height: 48px;
+    font-size: 1.1rem;
     border: none;
-    border-radius: 15px;
-    background-color: #e0e0e0;
-    color: #000;
-    transition: background-color 0.2s ease;
+    border-radius: 4px;
+    background-color: #f1f3f4;
+    color: #202124;
+    transition: all 0.1s ease;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
 }
 
 .botao:hover {
-    background-color: #d4d4d4;
+    background-color: #e8eaeb;
 }
 
-.btn-cancelar {
-    background-color: #ff6666;
-    color: white;
+.botao:active {
+    background-color: #dadce0;
 }
 
-.btn-cancelar:hover {
-    background-color: #ff4c4c;
+.botoes button:nth-child(8),  /* ÷ */
+.botoes button:nth-child(12), /* × */
+.botoes button:nth-child(16)  /* - */ {
+    background-color: #dadce0;
+    color: #202124;
 }
 
-.btn-reultado {
+.botoes button:nth-child(8):hover,
+.botoes button:nth-child(12):hover,
+.botoes button:nth-child(16):hover {
+    background-color: #d2d4d6;
+}
+
+.botoes button:nth-child(8):active,
+.botoes button:nth-child(12):active,
+.botoes button:nth-child(16):active {
+    background-color: #c6c8ca;
+}
+
+.botoes button:nth-child(20) {
+    background-color: #dadce0;
+    color: #202124;
+}
+
+.botoes button:nth-child(20):hover {
+    background-color: #d2d4d6;
+}
+
+.botoes button:nth-child(20):active {
+    background-color: #c6c8ca;
+}
+
+.botoes button:nth-child(24) {
     background-color: #4285f4;
     color: white;
 }
 
-.btn-reultado:hover {
-    background-color: #2a69d8;
+.botoes button:nth-child(24):hover {
+    background-color: #3b78e0;
+}
+
+.botoes button:nth-child(24):active {
+    background-color: #356ac7;
+}
+
+.btn-cancelar {
+    background-color: #f1f3f4;
+    color: #202124;
+    font-weight: 500;
+}
+
+.btn-cancelar:hover {
+    background-color: #e8eaeb;
+}
+
+.btn-cancelar:active {
+    background-color: #dadce0;
 }
 
 
+.botoes button:nth-child(1),  /* AC */
+.botoes button:nth-child(2),  /* ( */
+.botoes button:nth-child(3),  /* ) */
+.botoes button:nth-child(4),  /* % */
+.botoes button:nth-child(5),  /* √ */
+.botoes button:nth-child(6),  /* x^y */
+.botoes button:nth-child(7),  /* x! */
+.botoes button:nth-child(17), /* sin */
+.botoes button:nth-child(21), /* cos */
+.botoes button:nth-child(22)  /* tan */ {
+    background-color: #f1f3f4;
+    color: #202124;
+    font-size: 1rem;
+}
+
+.botoes button:nth-child(1):hover,
+.botoes button:nth-child(2):hover,
+.botoes button:nth-child(3):hover,
+.botoes button:nth-child(4):hover,
+.botoes button:nth-child(5):hover,
+.botoes button:nth-child(6):hover,
+.botoes button:nth-child(7):hover,
+.botoes button:nth-child(17):hover,
+.botoes button:nth-child(21):hover,
+.botoes button:nth-child(22):hover {
+    background-color: #e8eaeb;
+}
+
+.botoes button:nth-child(1):active,
+.botoes button:nth-child(2):active,
+.botoes button:nth-child(3):active,
+.botoes button:nth-child(4):active,
+.botoes button:nth-child(5):active,
+.botoes button:nth-child(6):active,
+.botoes button:nth-child(7):active,
+.botoes button:nth-child(17):active,
+.botoes button:nth-child(21):active,
+.botoes button:nth-child(22):active {
+    background-color: #dadce0;
+}
+
+@media (max-width: 480px) {
+    .Calculadora {
+        width: 90%; 
+        padding: 12px;
+    }
+
+    .tela-numeros {
+        margin-bottom: 12px;
+    }
+
+    .exibir-numeros {
+        height: 60px; 
+        font-size: 1.8rem;
+        padding: 6px 10px; 
+    }
+
+    .botoes {
+        gap: 6px; 
+    }
+
+    .botao {
+        height: 40px; 
+        font-size: 1rem; 
+    }
+}
