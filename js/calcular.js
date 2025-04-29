@@ -22,7 +22,6 @@ const calcular = {
         Array.from({length: a}, (_, i) => i + 1).reduce((acc, val) => acc * val, 1)
 };
 
-// Funções de inserção simplificadas
 const inserirFuncao = (fn) => exibirNaTela(`${fn}(`);
 const inserirRaizQuadrada = () => inserirFuncao("√");
 const inserirSeno = () => inserirFuncao("sin");
@@ -30,7 +29,6 @@ const inserirCosseno = () => inserirFuncao("cos");
 const inserirTangente = () => inserirFuncao("tan");
 const calcularPotencia = () => exibirNaTela("^");
 
-// Validação de parênteses
 const validarParenteses = (expr) => {
     let balance = 0;
     for (const char of expr) {
@@ -41,6 +39,30 @@ const validarParenteses = (expr) => {
     return balance === 0;
 };
 
+
+const processarSubExpressao = (expr) => {
+    
+    const operacoes = [
+         { regex: /(-?\d+\.?\d*)\^(-?\d+\.?\d*)/g, fn: calcular["^"] },  //Numero elevados a uma potencia 
+        { regex: /(-?\d+\.?\d*)([*/%])(-?\d+\.?\d*)/g }, //Procura multiplicação, divisão e porcentagem
+        { regex: /(-?\d+\.?\d*)([+-])(-?\d+\.?\d*)/g } //Procura soma e subtração
+    ];
+    
+    expr = expr.replace(/\s+/g, '');
+    
+    operacoes.forEach(({regex, fn}) => {
+        while (regex.test(expr)) {
+            expr = expr.replace(regex, (_, a, op, b) => //se o intem da listar tiver um fn le calcula ele commo função caso contrario ele usa o operador capturado e procura a função correspondente no objeto 
+                fn ? fn(parseFloat(a), parseFloat(b)) : 
+                calcular[op](parseFloat(a), parseFloat(b)));
+        }
+    });
+    
+    const resultado = parseFloat(expr);
+    if (isNaN(resultado)) throw new Error("Expressão inválida");
+    return resultado;
+};
+
 // Processamento de expressões
 const processarExpressao = (expr) => {
     // Substitui símbolos visuais por operadores matemáticos
@@ -48,8 +70,9 @@ const processarExpressao = (expr) => {
     
     // Processa funções especiais (sin, cos, tan, √, !)
     expr = expr.replace(/(sin|cos|tan|√)\(([^)]+)\)/g, (_, fn, inner) => 
-        calcular[fn](processarSubExpressao(inner)));
+    calcular[fn](processarSubExpressao(inner)));
     
+    //processo fatorial
     expr = expr.replace(/(\d+)!/g, (_, num) => calcular["!"](parseInt(num)));
     
     // Processa parênteses
@@ -61,28 +84,6 @@ const processarExpressao = (expr) => {
     return processarSubExpressao(expr);
 };
 
-const processarSubExpressao = (expr) => {
-    // Ordem de precedência
-    const operacoes = [
-        { regex: /(-?\d+\.?\d*)\^(-?\d+\.?\d*)/g, fn: calcular["^"] },
-        { regex: /(-?\d+\.?\d*)([*/%])(-?\d+\.?\d*)/g },
-        { regex: /(-?\d+\.?\d*)([+-])(-?\d+\.?\d*)/g }
-    ];
-    
-    expr = expr.replace(/\s+/g, '');
-    
-    operacoes.forEach(({regex, fn}) => {
-        while (regex.test(expr)) {
-            expr = expr.replace(regex, (_, a, op, b) => 
-                fn ? fn(parseFloat(a), parseFloat(b)) : 
-                calcular[op](parseFloat(a), parseFloat(b)));
-        }
-    });
-    
-    const resultado = parseFloat(expr);
-    if (isNaN(resultado)) throw new Error("Expressão inválida");
-    return resultado;
-};
 
 // Função principal de cálculo
 const ValidarExpessao = () => {

@@ -78,11 +78,11 @@ const teclasEspeciais = {
 document.addEventListener('keydown', function(event) {
     const tecla = event.key.toLowerCase();
     
-    // Verifica teclas especiais
+    
     if (teclasEspeciais[tecla]) {
         const botao = document.querySelector(`[onclick*="${teclasEspeciais[tecla]}"]`);
         if (botao) {
-            botao.click(); // Ativa o clique virtual
+            botao.click(); 
             botao.classList.add('tecla-pressionada');
             setTimeout(() => botao.classList.remove('tecla-pressionada'), 200);
         }
