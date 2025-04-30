@@ -63,19 +63,15 @@ const processarSubExpressao = (expr) => {
     return resultado;
 };
 
-// Processamento de expressões
 const processarExpressao = (expr) => {
-    // Substitui símbolos visuais por operadores matemáticos
     expr = expr.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
     
-    // Processa funções especiais (sin, cos, tan, √, !)
     expr = expr.replace(/(sin|cos|tan|√)\(([^)]+)\)/g, (_, fn, inner) => 
     calcular[fn](processarSubExpressao(inner)));
     
-    //processo fatorial
     expr = expr.replace(/(\d+)!/g, (_, num) => calcular["!"](parseInt(num)));
+
     
-    // Processa parênteses
     while (expr.includes('(')) {
         expr = expr.replace(/\(([^()]+)\)/g, (_, inner) => 
             processarSubExpressao(inner));
@@ -85,14 +81,37 @@ const processarExpressao = (expr) => {
 };
 
 
-// Função principal de cálculo
 const ValidarExpessao = () => {
     try {
-        if (!validarParenteses(tela.value)) {
+        const expressao = tela.value.trim();
+        
+        if (!validarParenteses(expressao)) {
             throw new Error("Parênteses não balanceados");
         }
-        tela.value = processarExpressao(tela.value);
+        
+        validarOperadores(expressao); 
+        tela.value = processarExpressao(expressao);
+        
     } catch (error) {
         tela.value = `Erro: ${error.message}`;
     }
 };
+
+function validarOperadores(expressao) {
+    const padroesInvalidos = [
+        /[+\-*/%^]{2,}/,     
+        /^[*/%^]/,           
+        /[+\-*/%^]$/,          
+        /\([+\-*/%^]/,         
+        /[+\-*/%^]\)/,       
+        /\.\d*\./,            
+        /[+\-*/%^]\s*[+\-*/%^]/ 
+    ];
+
+    for (const padrao of padroesInvalidos) {
+        if (padrao.test(expressao)) {
+            throw new Error("Operadores inválidos!");
+        }
+    }
+}
+

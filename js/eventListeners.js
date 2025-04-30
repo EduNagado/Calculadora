@@ -17,7 +17,7 @@ window.onload = function() {
             event.preventDefault();
             calcularPotencia();
         }
-        else if (tecla === "Escape") {
+        else if (tecla === "Espace") {
             limparTela();
         }
     });

@@ -11,6 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    padding: 16px; /* Adicionado para espaçamento em telas pequenas */
 }
 
 .Calculadora {
@@ -20,6 +21,7 @@ body {
     box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
     overflow: hidden;
     padding: 16px;
+    max-width: 100%; /* Garante que não ultrapasse a largura da tela */
 }
 
 .tela-numeros {
@@ -171,6 +173,99 @@ body {
     background-color: #dadce0;
 }
 
+/* Efeito quando tecla é pressionada */
+.tecla-pressionada {
+    transform: scale(0.92);
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
+    background-color: #e0e0e0 !important;
+    transition: all 0.1s ease;
+}
+
+/* Para botões de operação (ajuste conforme seu tema) */
+.btn-operacao.tecla-pressionada {
+    background-color:  #356ac7!important;
+}
+
+/* Para botão de igual */
+.botao[data-key="Enter"].tecla-pressionada {
+    background-color: #4CAF50 !important;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 600px) {
+    .Calculadora {
+        width: 95%;
+        padding: 12px;
+    }
+    
+    .exibir-numeros {
+        height: 60px;
+        font-size: 1.8rem;
+    }
+    
+    .botao {
+        height: 42px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+    
+    .Calculadora {
+        width: 100%;
+        max-width: 360px;
+        padding: 10px;
+    }
+    
+    .exibir-numeros {
+        height: 56px;
+        font-size: 1.6rem;
+        padding: 6px 10px;
+    }
+    
+    .botoes {
+        gap: 6px;
+    }
+    
+    .botao {
+        height: 40px;
+        font-size: 0.95rem;
+    }
+    
+    .botoes button:nth-child(1),
+    .botoes button:nth-child(2),
+    .botoes button:nth-child(3),
+    .botoes button:nth-child(4),
+    .botoes button:nth-child(5),
+    .botoes button:nth-child(6),
+    .botoes button:nth-child(7),
+    .botoes button:nth-child(17),
+    .botoes button:nth-child(21),
+    .botoes button:nth-child(22) {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .exibir-numeros {
+        font-size: 1.5rem;
+    }
+    
+    .botao {
+        height: 38px;
+        font-size: 0.9rem;
+    }
+    
+    .botoes {
+        gap: 5px;
+    }
+}
 @media (max-width: 480px) {
     .Calculadora {
         width: 90%; 
