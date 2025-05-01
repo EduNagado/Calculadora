@@ -11,7 +11,7 @@ const calcular = {
     "*": (a, b) => a * b,
     "/": (a, b) => b === 0 ? (() => { throw new Error("Divisão por zero") })() : a / b,
     "%": (a, b) => (a / 100) * b,
-    "^": (a, b) => Math.pow(a, b),
+    "^": (a, b) => potencia(a, b), 
     "√": (a) => Math.sqrt(a),
     "sin": (a) => Math.sin(a * Math.PI / 180),
     "cos": (a) => Math.cos(a * Math.PI / 180),
@@ -21,6 +21,14 @@ const calcular = {
         (() => { throw new Error("Fatorial inválido") })() : 
         Array.from({length: a}, (_, i) => i + 1).reduce((acc, val) => acc * val, 1)
 };
+
+function potencia(a, b){
+    
+}
+
+//mudar as funções prontas para codar na mao.
+//Quando a conta for 2(2) ele tem que multiplicar por nn ter uma expressao apos o operador 
+
 
 const inserirFuncao = (fn) => exibirNaTela(`${fn}(`);
 const inserirRaizQuadrada = () => inserirFuncao("√");
@@ -86,7 +94,7 @@ const ValidarExpessao = () => {
         const expressao = tela.value.trim();
         
         if (!validarParenteses(expressao)) {
-            throw new Error("Parênteses não balanceados");
+            throw new Error("");
         }
         
         validarOperadores(expressao); 
@@ -110,7 +118,7 @@ function validarOperadores(expressao) {
 
     for (const padrao of padroesInvalidos) {
         if (padrao.test(expressao)) {
-            throw new Error("Operadores inválidos!");
+            throw new Error("");
         }
     }
 }

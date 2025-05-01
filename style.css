@@ -11,18 +11,37 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 16px; /* Adicionado para espaçamento em telas pequenas */
+    padding: 16px; 
+    background-image: url(/public/abstract-uv-ultraviolet-light-composition.jpg);
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
-
 .Calculadora {
-    background-color: #ffffff;
+    background-color: #696969;
     width: 440px;
     border-radius: 8px;
+    border: 4px solid; 
+    border-image: linear-gradient(to right,rgb(76, 76, 214) 50%, rgb(230, 22, 167) 50% ) 1;
     box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
     overflow: hidden;
     padding: 16px;
-    max-width: 100%; /* Garante que não ultrapasse a largura da tela */
+    max-width: 100%;
+    animation: bordaEnergia 3s infinite; /* Aplica a animação */
 }
+
+@keyframes bordaEnergia {
+    0% {
+        border-image: linear-gradient(to right, rgb(120, 120, 255) 50%, rgb(255, 105, 200) 50%) 1;
+    }
+    50% {
+        border-image: linear-gradient(to right, rgb(60, 60, 180) 50%, rgb(200, 50, 150) 50%) 1; /* Cores mais escuras */
+    }
+    100% {
+        border-image: linear-gradient(to right, rgb(120, 120, 255) 50%, rgb(255, 105, 200) 50%) 1;
+    }
+}
+
 
 .tela-numeros {
     width: 100%;
@@ -37,7 +56,8 @@ body {
     padding: 8px 12px;
     border: none;
     border-radius: 4px;
-    background-color: #3b77e08a;
+    background: #3478f7;
+    background: linear-gradient(90deg, rgba(52, 120, 247, 1) 0%, rgba(75, 83, 235, 1) 34%, rgba(247, 52, 228, 1) 69%, rgba(247, 52, 228, 1) 100%);
     color: #202124;
     font-weight: 400;
     outline: none;
@@ -54,8 +74,8 @@ body {
     font-size: 1.1rem;
     border: none;
     border-radius: 4px;
-    background-color: #f1f3f4;
-    color: #202124;
+    background-color: #696969;
+    color: #ffffff;
     transition: all 0.1s ease;
     cursor: pointer;
     display: flex;
@@ -65,70 +85,74 @@ body {
 }
 
 .botao:hover {
-    background-color: #e8eaeb;
+    background-color: #7a7a7a;
 }
 
 .botao:active {
-    background-color: #dadce0;
+    background-color: #8b8b8b;
 }
 
 .botoes button:nth-child(8),  /* ÷ */
 .botoes button:nth-child(12), /* × */
 .botoes button:nth-child(16)  /* - */ {
-    background-color: #dadce0;
-    color: #202124;
+    background-color: #696969;
+    color: #ffffff;
+    border-radius: 4px;
 }
 
 .botoes button:nth-child(8):hover,
 .botoes button:nth-child(12):hover,
 .botoes button:nth-child(16):hover {
-    background-color: #d2d4d6;
+    background-color: #7a7a7a;
 }
 
 .botoes button:nth-child(8):active,
 .botoes button:nth-child(12):active,
 .botoes button:nth-child(16):active {
-    background-color: #c6c8ca;
+    background-color: #8b8b8b;
 }
 
 .botoes button:nth-child(20) {
-    background-color: #dadce0;
-    color: #202124;
+    background-color: #696969;
+    color: #ffffff;
+    border-radius: 4px;
 }
 
 .botoes button:nth-child(20):hover {
-    background-color: #d2d4d6;
+    background-color: #7a7a7a;
 }
 
 .botoes button:nth-child(20):active {
-    background-color: #c6c8ca;
+    background-color: #8b8b8b;
 }
 
 .botoes button:nth-child(24) {
-    background-color: #4285f4;
-    color: white;
+    background-color: #696969;
+    color: #ffffff;
+    border-radius: 4px;
 }
 
 .botoes button:nth-child(24):hover {
-    background-color: #3b78e0;
+    background-color: #7a7a7a;
 }
 
 .botoes button:nth-child(24):active {
-    background-color: #356ac7;
+    background-color: #8b8b8b;
 }
 
 .btn-cancelar {
-    background-color: #f1f3f4;
-    color: #202124;
+    background-color: #696969;
+    color: #ffffff;
     font-weight: 500;
+    border-radius: 4px;
 }
 
 .btn-cancelar:hover {
-    background-color: #e8eaeb;
+    background-color: #7a7a7a;
 }
 
 .btn-cancelar:active {
-    background-color: #dadce0;
+    background-color: #8b8b8b;
 }
 
 
@@ -142,9 +166,10 @@ body {
 .botoes button:nth-child(17), /* sin */
 .botoes button:nth-child(21), /* cos */
 .botoes button:nth-child(22)  /* tan */ {
-    background-color: #f1f3f4;
-    color: #202124;
+    background-color: #696969;
+    color: #ffffff;
     font-size: 1rem;
+    border-radius: 4px;
 }
 
 .botoes button:nth-child(1):hover,
@@ -157,7 +182,7 @@ body {
 .botoes button:nth-child(17):hover,
 .botoes button:nth-child(21):hover,
 .botoes button:nth-child(22):hover {
-    background-color: #e8eaeb;
+    background-color: #7a7a7a;
 }
 
 .botoes button:nth-child(1):active,
@@ -170,28 +195,22 @@ body {
 .botoes button:nth-child(17):active,
 .botoes button:nth-child(21):active,
 .botoes button:nth-child(22):active {
-    background-color: #dadce0;
+    background-color: #8b8b8b;
+    border-radius: 4px;
 }
 
-/* Efeito quando tecla é pressionada */
 .tecla-pressionada {
     transform: scale(0.92);
     box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
-    background-color: #e0e0e0 !important;
+    background-color: #8b8b8b !important;
     transition: all 0.1s ease;
 }
 
-/* Para botões de operação (ajuste conforme seu tema) */
-.btn-operacao.tecla-pressionada {
-    background-color:  #356ac7!important;
-}
 
-/* Para botão de igual */
 .botao[data-key="Enter"].tecla-pressionada {
-    background-color: #4CAF50 !important;
+    background-color: #8b8b8b !important;
 }
 
-/* Media Queries para responsividade */
 @media (max-width: 600px) {
     .Calculadora {
         width: 95%;
@@ -296,16 +315,13 @@ body {
 .tecla-pressionada {
     transform: scale(0.92);
     box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
-    background-color: #e0e0e0 !important;
+    background-color: #8b8b8b !important;
     transition: all 0.1s ease;
 }
 
-/* Para botões de operação (ajuste conforme seu tema) */
-.btn-operacao.tecla-pressionada {
-    background-color:  #356ac7!important;
-}
+
 
 /* Para botão de igual */
 .botao[data-key="Enter"].tecla-pressionada {
-    background-color: #4CAF50 !important;
+    background-color: #8b8b8b !important;
 }
